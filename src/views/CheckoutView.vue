@@ -130,8 +130,6 @@ import { required, email, min, numeric } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import zhTW from "../../json/zh_TW.json";
 
-import axios from "axios";
-
 import cartStore from "../stores/cartStore";
 import { mapActions, mapState } from "pinia";
 
@@ -170,7 +168,7 @@ export default {
         user: this.user,
         message: this.message,
       };
-      axios
+      this.$http
         .post(
           "https://vue3-course-api.hexschool.io/v2/api/int-hexschool/order",
           { data }
