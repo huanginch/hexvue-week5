@@ -11,17 +11,6 @@ import cartStore from "./stores/cartStore";
 import { mapActions } from "pinia";
 
 export default {
-  data() {
-    return {
-      user: {
-        name: "",
-        email: "",
-        tel: "",
-        address: "",
-        message: "",
-      },
-    };
-  },
   methods: {
     ...mapActions(cartStore, ["getCart"]),
   },
@@ -30,7 +19,6 @@ export default {
   },
   components: {
     Navbar,
-    // MyLoading,
   },
 };
 </script>
