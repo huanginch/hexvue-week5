@@ -27,7 +27,12 @@
         >
           加入購物車
         </button>
-        <router-link to="/checkout" class="btn btn-primary rounded-0" @click="addToCart(targetProduct.id, qty)">直接購買</router-link>
+        <router-link
+          to="/checkout"
+          class="btn btn-primary rounded-0"
+          @click="addToCart(targetProduct.id, qty)"
+          >直接購買</router-link
+        >
       </div>
     </div>
   </div>

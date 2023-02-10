@@ -125,6 +125,8 @@
 </template>
 
 <script>
+const { VITE_API_URL, VITE_API_PATH } = import.meta.env;
+
 import { Form, Field, ErrorMessage, defineRule, configure } from "vee-validate";
 import { required, email, min, numeric } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
@@ -169,10 +171,7 @@ export default {
         message: this.message,
       };
       this.$http
-        .post(
-          "https://vue3-course-api.hexschool.io/v2/api/int-hexschool/order",
-          { data }
-        )
+        .post(`${VITE_API_URL}/${VITE_API_PATH}/order`, { data })
         .then((res) => {
           //清空購物車
           this.getCart();
