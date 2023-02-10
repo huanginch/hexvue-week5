@@ -1,0 +1,125 @@
+import { defineStore } from "pinia";
+import axios from "axios";
+
+export default defineStore("cartStore", {
+  state: () => ({
+    carts: [],
+    final_total: 0,
+    isLoading: false,
+    url: "https://vue3-course-api.hexschool.io/v2/api/",
+    path: "int-hexschool",
+  }),
+  getters: {
+    totalCart: ({ carts }) => {
+      //購物車商品總數
+      if (carts === undefined) {
+        return 0;
+      } else {
+        return carts.length;
+      }
+    },
+  },
+  actions: {
+    getCart() {
+      //開啟loading
+      this.isLoading = true;
+      axios
+        .get(`${this.url}${this.path}/cart`)
+        .then((res) => {
+          //購物車資料在res.data.data.carts裡...
+          this.carts = res.data.data.carts;
+          this.final_total = res.data.data.final_total;
+          //關閉loading
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    },
+    addToCart(product_id, qty = 1) {
+      //開啟loading
+      this.isLoading = true;
+      const data = {
+        product_id,
+        qty,
+      };
+      const currentCart = this.carts.find((item) => item.id === product_id);
+      //判斷是否有重複的產品
+      if (currentCart) {
+        currentCart.qty += qty;
+        //有重複的產品，更新購物車
+        this.updateCart(currentCart.id, data);
+      } else {
+        //沒有重複的產品，新增購物車
+        axios
+          .post(`${this.url}${this.path}/cart`, { data })
+          .then((res) => {
+            //關閉loading
+            this.isLoading = false;
+            alert(res.data.message);
+            //add to cart
+            this.getCart();
+          })
+          .catch((err) => {
+            alert(err.response.data.message);
+          });
+      }
+    },
+    setCartQty(id, event) {
+      //更新本地端購物車數量
+      const currentCart = this.carts.find((item) => item.id === id);
+      currentCart.qty = event.target.value * 1; //轉成數字
+      const data = {
+        product_id: currentCart.product_id,
+        qty: currentCart.qty,
+      };
+      this.updateCart(id, data);
+    },
+    updateCart(id, data = {}) {
+      //開啟loading
+      this.isLoading = true;
+      //更新購物車
+      axios
+        .put(`${this.url}${this.path}/cart/${id}`, { data })
+        .then((res) => {
+          //關閉loading
+          this.isLoading = false;
+          alert(res.data.message);
+          this.getCart();
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    },
+    removeCart(id) {
+      //開啟loading
+      this.isLoading = true;
+      axios
+        .delete(`${this.url}${this.path}/cart/${id}`)
+        .then((res) => {
+          //關閉loading
+          this.isLoading = false;
+          alert(res.data.message);
+          this.getCart();
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    },
+    removeAllCart() {
+      //開啟loading
+      this.isLoading = true;
+      axios
+        .delete(`${this.url}${this.path}/carts`)
+        .then((res) => {
+          //關閉loading
+          this.isLoading = false;
+          alert(res.data.message);
+          this.getCart();
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    },
+  },
+});
