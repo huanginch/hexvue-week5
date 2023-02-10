@@ -125,8 +125,6 @@
 </template>
 
 <script>
-import MyLoading from "../components/MyLoading.vue";
-
 import { Form, Field, ErrorMessage, defineRule, configure } from "vee-validate";
 import { required, email, min, numeric } from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
@@ -205,7 +203,6 @@ export default {
     Form,
     Field,
     ErrorMessage,
-    MyLoading,
   },
 };
 </script>

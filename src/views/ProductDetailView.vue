@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import MyLoading from "@/components/MyLoading.vue";
 import ProductDetail from "@/components/ProductDetail.vue";
 import productStore from "../stores/productStore";
 import cartStore from "../stores/cartStore";
@@ -34,7 +33,6 @@ export default {
   },
   components: {
     ProductDetail,
-    MyLoading,
   },
 };
 </script>

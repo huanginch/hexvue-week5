@@ -72,12 +72,11 @@
     :del-func="delFunc"
   ></delete-confirm-modal>
 
-  <my-loading v-model:active="isLoading"></my-loading>
+  <MyLoading v-model:active="isLoading"></MyLoading>
 </template>
 
 <script>
 import DeleteConfirmModal from "../components/DeleteConfirmModal.vue";
-import MyLoading from "../components/MyLoading.vue";
 
 import cartStore from "../stores/cartStore";
 import { mapState, mapActions } from "pinia";
@@ -98,7 +97,6 @@ export default {
   },
   components: {
     DeleteConfirmModal,
-    MyLoading,
   },
 };
 </script>
