@@ -121,7 +121,7 @@
       </button>
     </Form>
   </div>
-  <my-loading v-model:active="isLoading"></my-loading>
+  <MyLoading v-model:active="isLoading"></MyLoading>
 </template>
 
 <script>
