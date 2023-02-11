@@ -14,9 +14,9 @@
         $NT {{ targetProduct.price }}
       </p>
       <div class="d-flex justify-content-between mb-5">
-        <p>酒精濃度: {{}}</p>
+        <p>酒精濃度: {{ targetProduct.abv }}</p>
         <p>產地: {{ targetProduct.country }}</p>
-        <p>容量: {{}}</p>
+        <p>容量: {{ targetProduct.capacity }}</p>
       </div>
       <div class="d-flex justify-content-between">
         <input v-model="qty" type="number" min="1" class="me-3" />
