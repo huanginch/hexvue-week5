@@ -1,13 +1,12 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+const { VITE_API_URL, VITE_API_PATH } = import.meta.env;
 
 export default defineStore("cartStore", {
   state: () => ({
     carts: [],
     final_total: 0,
     isLoading: false,
-    url: "https://vue3-course-api.hexschool.io/v2/api/",
-    path: "int-hexschool",
   }),
   getters: {
     totalCart: ({ carts }) => {
@@ -24,7 +23,7 @@ export default defineStore("cartStore", {
       //開啟loading
       this.isLoading = true;
       axios
-        .get(`${this.url}${this.path}/cart`)
+        .get(`${VITE_API_URL}${VITE_API_PATH}/cart`)
         .then((res) => {
           //購物車資料在res.data.data.carts裡...
           this.carts = res.data.data.carts;
@@ -52,7 +51,7 @@ export default defineStore("cartStore", {
       } else {
         //沒有重複的產品，新增購物車
         axios
-          .post(`${this.url}${this.path}/cart`, { data })
+          .post(`${VITE_API_URL}${VITE_API_PATH}/cart`, { data })
           .then((res) => {
             //關閉loading
             this.isLoading = false;
@@ -80,7 +79,7 @@ export default defineStore("cartStore", {
       this.isLoading = true;
       //更新購物車
       axios
-        .put(`${this.url}${this.path}/cart/${id}`, { data })
+        .put(`${VITE_API_URL}${VITE_API_PATH}/cart/${id}`, { data })
         .then((res) => {
           //關閉loading
           this.isLoading = false;
@@ -95,7 +94,7 @@ export default defineStore("cartStore", {
       //開啟loading
       this.isLoading = true;
       axios
-        .delete(`${this.url}${this.path}/cart/${id}`)
+        .delete(`${VITE_API_URL}${VITE_API_PATH}/cart/${id}`)
         .then((res) => {
           //關閉loading
           this.isLoading = false;
@@ -110,7 +109,7 @@ export default defineStore("cartStore", {
       //開啟loading
       this.isLoading = true;
       axios
-        .delete(`${this.url}${this.path}/carts`)
+        .delete(`${VITE_API_URL}${VITE_API_PATH}/carts`)
         .then((res) => {
           //關閉loading
           this.isLoading = false;

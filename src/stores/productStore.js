@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+const { VITE_API_URL, VITE_API_PATH } = import.meta.env;
 
 export default defineStore("productStore", {
   //data, methods, computed for vue component
@@ -8,14 +9,12 @@ export default defineStore("productStore", {
     products: [],
     product: {},
     isGettingProducts: false,
-    url: "https://vue3-course-api.hexschool.io/v2/api/",
-    path: "int-hexschool",
   }),
   actions: {
     getProducts() {
       this.isGettingProducts = true;
       axios
-        .get(`${this.url}${this.path}/products/all`)
+        .get(`${VITE_API_URL}${VITE_API_PATH}/products/all`)
         .then((response) => {
           this.isGettingProducts = false;
           this.products = response.data.products;
@@ -27,7 +26,7 @@ export default defineStore("productStore", {
     getProductById(productId) {
       this.isGettingProducts = true;
       axios
-        .get(`${this.url}${this.path}/product/${productId}`)
+        .get(`${VITE_API_URL}${VITE_API_PATH}/product/${productId}`)
         .then((res) => {
           this.isGettingProducts = false;
           this.product = res.data.product;
