@@ -171,7 +171,7 @@ export default {
         message: this.message,
       };
       this.$http
-        .post(`${VITE_API_URL}/${VITE_API_PATH}/order`, { data })
+        .post(`${VITE_API_URL}${VITE_API_PATH}/order`, { data })
         .then((res) => {
           //清空購物車
           this.getCart();
