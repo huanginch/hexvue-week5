@@ -29,7 +29,6 @@ export default {
   mounted() {
     this.productId = this.$route.params.id;
     this.getProductById(this.productId);
-    console.log(this.isLoading);
   },
   components: {
     ProductDetail,
